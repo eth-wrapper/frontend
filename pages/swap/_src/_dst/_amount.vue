@@ -116,6 +116,10 @@
     ,
     methods: {
       registerNewSwap(){
+        if(!this.$auth.loggedIn){
+          this.$toast.error('You are not logged in. Login please.');
+          return;
+        }
         let params = {
           deposit: this.sourceCoin.code,
           receiving: this.destinationCoin.code,
