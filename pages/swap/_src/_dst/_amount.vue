@@ -11,50 +11,55 @@
     <div class="row">
       <div class="col-md-12">
         <div class="box-trans color-white">
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <h5>{{$t('pages.newSwap.depositCoinTitle')}}</h5>
-              <div class="form-control">
-                <img :src="`/coin-icons/${sourceCoin.network}/${sourceCoin.code}.png`" class="coin-avatar">
-                {{sourceCoin.title}} ({{sourceCoin.code}})
-              </div>
-            </div>
-            <div class="form-group col-sm-6">
-              <h5>{{$t('pages.newSwap.receivingCoinTitle')}}</h5>
-              <div class="form-control">
-                <img :src="`/coin-icons/${destinationCoin.network}/${destinationCoin.code}.png`" class="coin-avatar">
-                {{destinationCoin.title}} ({{destinationCoin.code}})
-              </div>
-            </div>
+          <div v-if="sourceCoin === undefined || destinationCoin === undefined" class="text-center">
+            <i class="fa fa-spinner font-4xl fa-lg fa-spin"></i>
           </div>
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <h5>{{$t('pages.newSwap.depositAmountTitle',{coin: sourceCoin.code})}}</h5>
-              <div class="form-control">
-                {{amount}}
+          <div v-else>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <h5>{{$t('pages.newSwap.depositCoinTitle')}}</h5>
+                <div class="form-control">
+                  <img :src="`/coin-icons/${sourceCoin.network}/${sourceCoin.code}.png`" class="coin-avatar">
+                  {{sourceCoin.title}} ({{sourceCoin.code}})
+                </div>
               </div>
-            </div>
-            <div class="form-group col-sm-6">
-              <h5>{{$t('pages.newSwap.receivingAmountTitle',{coin: destinationCoin.code})}}</h5>
-              <div class="form-control bg-info border-info color-white text-bold"
-                   style="display: flex; position: relative">
-                {{convertedAmount | round(6)}}
-                <div v-if="conversionRateInProgress" style="position: absolute; right: 1em">
-                  <i class="fa fa-spinner fa-lg fa-spin"></i>
+              <div class="form-group col-sm-6">
+                <h5>{{$t('pages.newSwap.receivingCoinTitle')}}</h5>
+                <div class="form-control">
+                  <img :src="`/coin-icons/${destinationCoin.network}/${destinationCoin.code}.png`" class="coin-avatar">
+                  {{destinationCoin.title}} ({{destinationCoin.code}})
                 </div>
               </div>
             </div>
-          </div>
-          <div style="height: 2em">&nbsp;</div>
-          <h2>{{$t('pages.newSwap.walletInfoTitle')}}</h2>
-          <!--<h6>Enter yours {{destinationCoin.network}} wallet address to receive {{destinationCoin.code}}</h6>-->
-          <h6 :dir="pageDirection">{{$t('pages.newSwap.walletDescription',destinationCoin)}}</h6>
-          <div class="row">
-            <div class="form-group col-lg-6">
-              <input v-model="walletAddress" :placeholder="$t('pages.newSwap.walletPlaceholder')" type="text" class="form-control">
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <h5>{{$t('pages.newSwap.depositAmountTitle',{coin: sourceCoin.code})}}</h5>
+                <div class="form-control">
+                  {{amount}}
+                </div>
+              </div>
+              <div class="form-group col-sm-6">
+                <h5>{{$t('pages.newSwap.receivingAmountTitle',{coin: destinationCoin.code})}}</h5>
+                <div class="form-control bg-info border-info color-white text-bold"
+                     style="display: flex; position: relative">
+                  {{convertedAmount | round(6)}}
+                  <div v-if="conversionRateInProgress" style="position: absolute; right: 1em">
+                    <i class="fa fa-spinner fa-lg fa-spin"></i>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form-group col-lg-6">
-              <button @click="registerNewSwap" class="btn btn-success" type="button">{{$t('pages.newSwap.btnTitle')}}</button>
+            <div style="height: 2em">&nbsp;</div>
+            <h2>{{$t('pages.newSwap.walletInfoTitle')}}</h2>
+            <!--<h6>Enter yours {{destinationCoin.network}} wallet address to receive {{destinationCoin.code}}</h6>-->
+            <h6 :dir="pageDirection">{{$t('pages.newSwap.walletDescription',destinationCoin)}}</h6>
+            <div class="row">
+              <div class="form-group col-lg-6">
+                <input v-model="walletAddress" :placeholder="$t('pages.newSwap.walletPlaceholder')" type="text" class="form-control">
+              </div>
+              <div class="form-group col-lg-6">
+                <button @click="registerNewSwap" class="btn btn-success" type="button">{{$t('pages.newSwap.btnTitle')}}</button>
+              </div>
             </div>
           </div>
         </div>
@@ -86,9 +91,9 @@
     components: {CoinSelect, CoinSwapBox},
     data() {
       return {
-        conversionRateInProgress: true,
+        conversionRateInProgress: false,
         registerInProgress: false,
-        conversionRate: 0,
+        conversionRate: 1,
         amount: this.$route.params.amount || 1,
         walletAddress: ""
       }
@@ -109,30 +114,7 @@
       },
     }
     ,
-    mounted() {
-      this.getConversionRate()
-      setInterval(() => {
-        this.getConversionRate();
-      }, 60 * 1000);
-    }
-    ,
     methods: {
-      getConversionRate() {
-        this.conversionRateInProgress = true;
-        this.$axios.post('/api/v0.1/swap/conversion-rate', {
-          deposit: this.sourceCoin.code,
-          receiving: this.destinationCoin.code
-        })
-          .then(({data}) => {
-            if (data.success)
-              this.conversionRate = data.rate;
-          })
-          .catch(error => {
-          })
-          .then(() => {
-            this.conversionRateInProgress = false;
-          })
-      },
       registerNewSwap(){
         let params = {
           deposit: this.sourceCoin.code,
