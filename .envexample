@@ -1,0 +1,12 @@
+SITE_HOST="localhost"
+SITE_PORT="5500"
+_AXIOS_BASE_URL_="http://localhost:5501/"
+
+PM2_APP_NAME="bitwrapper-frontend"
+
+WEBSITE_BASE_TITLE="Bit Wrapper"
+
+EXCHANGE_DEFAULT_SOURCE="BTC"
+EXCHANGE_DEFAULT_TARGET="BBTC"
+
+TEST_MODE=true

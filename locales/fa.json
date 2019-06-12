@@ -1,0 +1,197 @@
+{
+  "helloMessage": "سلام",
+  "serverSideError": "خطا سمت سرور",
+  "You": "شما",
+  "you": "شما",
+  "topHeader":{
+    "help": "راهنما",
+    "logout": "خروج",
+    "login": "ورود",
+    "profile": "اظلاعات کاربری",
+    "swapList": "مبادلات من"
+  },
+  "leftSideBar":{
+    "home": "خانه",
+    "new": "جدید",
+    "userMenus":"منوی کاربر",
+    "profile": "پروفایل",
+    "adminMenuTitle": "منوی مدیران",
+    "userSwaps": "مبادلات من",
+    "manageSwaps": "مدیریت مبادلات"
+  },
+  "components":{
+    "coinSwapBox":{
+      "sendTitle": "ارسال {coin}",
+      "receiveTitle": "دریافت {coin}",
+      "btnSwap": "مبادله"
+    },
+    "updateUsername":{
+      "label": "نام کاربری",
+      "btnTitle": "ویرایش"
+    },
+    "updateEmail":{
+      "label": "ایمیل",
+      "placeholder": "temp-mail@domain.com",
+      "btnTitle": "ویرایش"
+    },
+    "loginModal":{
+      "header": "ورود به {website}",
+      "comments":{
+        "global": "برای ورود نیاز است که شما نرم اقزار BrightID را روی تلفن همراه خود نصب کرده باشید. برای اطلاعات بیشتر, میتوانید قسمت {user guide} را مطالعه یا به وبسایت {BrightID} مراجعه کنید.",
+        "hear": "اینجا",
+        "brightID": "BrightID",
+        "userGuide": "راهنما",
+        "pc":{
+          "head": "برای ورود از طریق کامپیوتر شخصی:",
+          "items": [
+            "با استفاده از نرم افزار BrightID در تلفن همراه خود کد QR بالا را اسکن کنید.",
+            "بر روی دکمه تایید کلیک کنید."
+          ]
+        },
+        "smartPhone":{
+          "head": "برای ورود از طریق تلفن همراه:",
+          "items":[
+            "بر روی کد QR بالا کلیک کرده و آن را توسط نرم افزار BrightID باز کنید.",
+            "بر روی دکمه تایید کلیک کنید."
+          ]
+        }
+      }
+    }
+  },
+  "pages":{
+    "home":{
+      "topTitle":"به سادگی بیت کوین و اتریوم را مبادله کنید",
+      "subTitle":"یک بیت کوین ارسال کنید و معادل ان اتریوم دریافت کنید"
+    },
+    "newSwap":{
+      "depositCoinTitle": "کوین ارسالی",
+      "depositAmountTitle": "مقدار {coin}",
+      "receivingCoinTitle": "کوین دریافتی",
+      "receivingAmountTitle": "مقدار {coin}",
+      "walletInfoTitle": "اطلاعات کیف پول",
+      "walletDescription": "آدرس کیف پول {network} خود را برای دریافت {code} وارد کنید",
+      "walletPlaceholder": "آدرس کیف پول شما برای دریافت کوین ها",
+      "btnTitle": "ارسال درخواست"
+    },
+    "swapView":{
+      "progressSteps": ["ثبت آدرس","ارسال کوین", "تایید ارسال", "مبادله","اتمام"],
+      "sendBox":{
+        "sendTitle": "{amount} {coin} به آدرس زیر ارسال کنید",
+        "sendSubTitle": "مبادله به صورت خودکار پس از آنکه واریز انجام شود اغاز می گردد",
+        "addressTitle": "آدرس",
+        "copyMessage": "آدرس بالا را copy و در کیف پول خود past کنید. و یا بوسیله نرم افزار کیف پول خود کد QR بالا را اسکن کنید.",
+        "metaMaskMessage": "برای ارسال کوین ها اینجا را کلیک کنید",
+        "sendCoins": "Send Coins"
+      }
+    },
+    "userSwapList":{
+      "listBox":{
+        "title": "لیست مبادلات",
+        "head": {
+          "id": "ID",
+          "status": "وضعیت",
+          "depositCoin": "کوین ارسالی",
+          "depositAmount": "مقدار",
+          "depositWallet": "کیف پول",
+          "receivingCoin": "کوین دربافتی",
+          "receivingAmount": "مقدار",
+          "receivingWallet": "کیف پول"
+        },
+        "status": {
+          "new": "جدید",
+          "deposit-init": "ارسال شده",
+          "deposit-confirmed": "تایید ارسال",
+          "withdraw-init": "دریافت شده",
+          "withdraw-confirmed": "تایید دریافت",
+          "cancel": "لغو",
+          "fail": "خطا"
+        }
+      }
+    },
+    "wallet":{
+      "mainBox": {
+        "title": "اطلاعات کیف پول",
+        "address": "آدرس",
+        "transactions": "تراکنش ها",
+        "tableHead":{
+          "trade": "معامله",
+          "txHash": "hash تراکنش",
+          "from": "فرستنده",
+          "to": "دریافت کننده",
+          "type": "نوع",
+          "status": "وضعیت",
+          "token": "توکن",
+          "count": "تعداد"
+        },
+        "status":{
+          "new": "جدید",
+          "pending": "در حال انجام",
+          "done": "انجام شده",
+          "cancel": "لغو شده",
+          "fail": "خطا"
+        },
+        "txType":{
+          "deposit": "سرمایه گذاری",
+          "withdraw": "برداشت",
+          "trade": "معامله"
+        }
+      },
+      "balanceBox":{
+        "title": "سرمایه",
+        "btnTitle": "بروزرسانی",
+        "refreshSuccess": "بروزرسانی با موفقیت انجام شد"
+      },
+      "withdrawBox":{
+        "title": "برداشت",
+        "wallet":{
+          "label": "ارسال به آدرس",
+          "placeholder": "آدرس کیف پول"
+        },
+        "token":{
+          "label": "نوع توکن"
+        },
+        "amount":{
+          "label": "تعداد"
+        },
+        "btnTitle": "برداشت",
+        "alert":{
+          "title": "توجه: ",
+          "text": "پروسه برداشت در لحظه انجام نمی شود. انجام این عملیات ممکن است ساعاتی به طول بیانجامد."
+        }
+      }
+    },
+    "profile":{
+      "infoBox": {
+        "bidScore": "امتیاز BrightID",
+        "location": "مکان",
+        "joined": "عضویت",
+        "lastSeen": "اخرین بازدید",
+        "feedbackScore": "امتیاز کاربران"
+      },
+      "editBox": {
+        "firstName": {
+          "label": "نام",
+          "placeholder": "نام خود را وارد کنید"
+        },
+        "lastName": {
+          "label": "نام خانوادگی",
+          "placeholder": "نام خانوادگی خود را وارد کنید"
+        },
+        "about": {
+          "label": "درباره",
+          "placeholder": "یک متن کوتاه درباره خود وارد کنید"
+        },
+        "country": {
+          "label": "کشور"
+        },
+        "phone": {
+          "label": "تلفن همراه",
+          "placeholder": "+1x-xxx-xxx-xxxx"
+        }
+      },
+      "feedbackBox":{
+        "title": "امتیاز کاربران"
+      }
+    }
+  }
+}

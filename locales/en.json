@@ -1,0 +1,197 @@
+{
+  "helloMessage": "Hello",
+  "serverSideError": "Server side error",
+  "You": "You",
+  "you": "you",
+  "topHeader":{
+    "help": "Help",
+    "logout": "Logout",
+    "login": "Login",
+    "profile": "Profile",
+    "swapList": "My Swap List"
+  },
+  "leftSideBar":{
+    "home": "Home",
+    "new": "new",
+    "userMenus":"User Menus",
+    "profile": "Profile",
+    "adminMenuTitle": "Admin Menus",
+    "userSwaps": "My Swap List",
+    "manageSwaps": "Swaps Management"
+  },
+  "components":{
+    "coinSwapBox":{
+      "sendTitle": "You Send {coin}",
+      "receiveTitle": "You get {coin}",
+      "btnSwap": "Swap"
+    },
+    "updateUsername":{
+      "label": "Username",
+      "btnTitle": "Change"
+    },
+    "updateEmail":{
+      "label": "Email",
+      "placeholder": "temp-mail@domain.com",
+      "btnTitle": "Change"
+    },
+    "loginModal":{
+      "header": "Login to {website}",
+      "comments":{
+        "global": "To log in, you need to have BrightID app installed on your smartphone. For more information, you can read our {user guide} or visit {BrightID} website.",
+        "hear": "hear",
+        "brightID": "BrightID",
+        "userGuide": "user guide",
+        "pc":{
+          "head": "To log in on your pc:",
+          "items": [
+            "Scan the QR code above with BrightID app on your smartphone.",
+            "Confirm the connection."
+          ]
+        },
+        "smartPhone":{
+          "head": "To log in on your smartphone:",
+          "items":[
+            "Tap on the QR code above and open it with BrightID.",
+            "Confirm the connection."
+          ]
+        }
+      }
+    }
+  },
+  "pages":{
+    "home":{
+      "topTitle":"Simply Swap Bitcoin & Ethereum",
+      "subTitle":"Pay one Bitcoin and generate equivalent Ethereum token"
+    },
+    "newSwap":{
+      "depositCoinTitle": "Sending Coin",
+      "depositAmountTitle": "{coin} Amount",
+      "receivingCoinTitle": "Receiving Coin",
+      "receivingAmountTitle": "{coin} Amount",
+      "walletInfoTitle": "Wallet info",
+      "walletDescription": "Enter yours {network} wallet address to receive {code}",
+      "walletPlaceholder": "Your wallet address to receive coins",
+      "btnTitle": "Submit"
+    },
+    "swapView":{
+      "progressSteps": ["Enter Address","Send Coins", "Send Confirmed", "Transfer", "Done"],
+      "sendBox":{
+        "sendTitle": "Send {amount} {coin} to the address below",
+        "sendSubTitle": "Swap will automatically initiate once deposit is detected on below address",
+        "addressTitle": "ADDRESS",
+        "copyMessage": "Copy & paste this address to your wallet or scan the QR code via your wallet app",
+        "metaMaskMessage": "Click here to send your coins",
+        "sendCoins": "Send Coins"
+      }
+    },
+    "userSwapList":{
+      "listBox":{
+        "title": "Swap List",
+        "head": {
+          "id": "ID",
+          "status": "Status",
+          "depositCoin": "Deposit Coin",
+          "depositAmount": "Deposit Amount",
+          "depositWallet": "Deposit Wallet",
+          "receivingCoin": "Receiving Coin",
+          "receivingAmount": "Receiving Amount",
+          "receivingWallet": "Receiving Wallet"
+        },
+        "status": {
+          "new": "new",
+          "deposit-init": "deposit init",
+          "deposit-confirmed": "deposit confirmed",
+          "withdraw-init": "withdraw init",
+          "withdraw-confirmed": "withdraw confirmed",
+          "cancel": "cancel",
+          "fail": "fail"
+        }
+      }
+    },
+    "wallet":{
+      "mainBox": {
+        "title": "Wallet info",
+        "address": "Address",
+        "transactions": "Transactions",
+        "tableHead":{
+          "trade": "Trade",
+          "txHash": "tx-Hash",
+          "from": "From",
+          "to": "To",
+          "type": "Type",
+          "status": "Status",
+          "token": "Token",
+          "count": "Count"
+        },
+        "status":{
+          "new": "new",
+          "pending": "pending",
+          "done": "done",
+          "cancel": "cancel",
+          "fail": "fail"
+        },
+        "txType":{
+          "deposit": "deposit",
+          "withdraw": "withdraw",
+          "trade": "trade"
+        }
+      },
+      "balanceBox":{
+        "title": "Balance",
+        "btnTitle": "Refresh",
+        "refreshSuccess": "Balance update successfully"
+      },
+      "withdrawBox":{
+        "title": "Withdraw",
+        "wallet":{
+          "label": "Send to address",
+          "placeholder": "Wallet address"
+        },
+        "token":{
+          "label": "Token"
+        },
+        "amount":{
+          "label": "Amount"
+        },
+        "btnTitle": "Withdraw",
+        "alert":{
+          "title": "Attention: ",
+          "text": "Withdrawal process is not real-time. After submission of withdrawal, it takes some time for the transaction to be confirmed."
+        }
+      }
+    },
+    "profile":{
+      "infoBox": {
+        "bidScore": "BrightID score",
+        "location": "Location",
+        "joined": "Joined",
+        "lastSeen": "Last seen",
+        "feedbackScore": "Feedback score"
+      },
+      "editBox": {
+        "firstName": {
+          "label": "First name",
+          "placeholder": "Enter your first name"
+        },
+        "lastName": {
+          "label": "Last name",
+          "placeholder": "Enter your last name"
+        },
+        "about": {
+          "label": "About",
+          "placeholder": "Enter small text about you"
+        },
+        "country": {
+          "label": "Country"
+        },
+        "phone": {
+          "label": "Phone number",
+          "placeholder": "+1x-xxx-xxx-xxxx"
+        }
+      },
+      "feedbackBox":{
+        "title": "User feedback"
+      }
+    }
+  }
+}
