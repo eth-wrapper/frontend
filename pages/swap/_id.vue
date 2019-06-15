@@ -79,25 +79,29 @@
             </div>
           </div>
         </div>
+
+        <!-- Send deposit confirmation box -->
         <div v-if="swap.status === 'deposit-sent'" class="box-shadow-2 bg-white pd10">
-          <h4 class="nomg font-bolder">Deposit detected successfully and Confirmation in progress ...</h4>
-          <div style="margin-bottom: 1em">Please be patient to transaction be confirmed.</div>
+          <h4 :dir="pageDirection" class="nomg font-bolder">{{$t('pages.swapView.sendConfirmBox.message1')}}</h4>
+          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.sendConfirmBox.message2')}}</div>
         </div>
+
+        <!-- Withdraw waiting for send -->
         <div v-if="swap.status === 'deposit-confirmed'" class="box-shadow-2 bg-white pd10">
-          <h4 class="nomg font-bolder">Deposit detected successfully and <span class="color-orange">{{swap.receivingCoin.code}}</span>
-            transfer in progress ...</h4>
-          <div style="margin-bottom: 1em">Transfer may take a while. please be patient.</div>
+          <h4 :dir="pageDirection" class="nomg font-bolder" v-html="$t('pages.swapView.withdrawWaitingBox.message1', {code: swap.receivingCoin.code})"></h4>
+          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.withdrawWaitingBox.message2')}}</div>
         </div>
+
+        <!-- Withdraw waiting for confirm -->
         <div v-if="swap.status === 'withdraw-sent'" class="box-shadow-2 bg-white pd10">
-          <h4 class="nomg font-bolder">Your <span class="color-orange">{{swap.receivingCoin.code}}</span> transferred.
-            Please be patient to transaction be confirmed</h4>
-          <div style="margin-bottom: 1em">Transaction confirmation may take a while. please be patient.</div>
+          <h4 :dir="pageDirection" class="nomg font-bolder" v-html="$t('pages.swapView.withdrawConfirmingBox.message1', {code: swap.receivingCoin.code})"></h4>
+          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.withdrawConfirmingBox.message2')}}</div>
         </div>
+
+        <!-- Done status info viewer box -->
         <div v-if="swap.status === 'withdraw-confirmed'" class="box-shadow-2 bg-white pd10">
-          <h4 class="nomg font-bolder">
-            Your <span class="color-orange">{{swap.receivingCoin.code}}</span> send transaction confirmed successfully.
-          </h4>
-          <div style="margin-bottom: 1em">Check your wallet now.</div>
+          <h4 :dir="pageDirection" class="nomg font-bolder" v-html="$t('pages.swapView.doneStatusBox.message1', {code: swap.receivingCoin.code})"></h4>
+          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.doneStatusBox.message2')}}</div>
         </div>
         <div v-if="swap.status === 'done'" class="box-shadow-2 bg-white pd10">
           <h4 class="nomg font-bolder">Your <span class="color-orange">{{swap.receivingCoin.code}}</span> transfer done
@@ -105,23 +109,23 @@
         </div>
         <div class="box-shadow-2 bg-white pd10" style="margin-top: 1em">
           <div>
-            Swap ID: <span class="font-bold">{{swap._id}}</span>
+            {{$t('pages.swapView.transactionBox.swapId')}}: <span dir="ltr" class="font-bold">{{swap._id}}</span>
           </div>
           <div v-if="swap.depositTxHash">
-            Deposit:
-            <a target="_blank" :href="txHashUrl(swap.depositCoin.network, swap.depositTxHash)">
+            {{$t('pages.swapView.transactionBox.depositTransaction')}}:
+            <a dir="ltr" target="_blank" :href="txHashUrl(swap.depositCoin.network, swap.depositTxHash)">
               <span class="font-bold">{{swap.depositTxHash}}</span>
             </a>
           </div>
           <div v-if="coinSended">
-            Transaction:
-            <a target="_blank" :href="txHashUrl(swap.receivingCoin.network, swap.receiveTxHash)">
+            {{$t('pages.swapView.transactionBox.withdrawTransaction')}}:
+            <a dir="ltr" target="_blank" :href="txHashUrl(swap.receivingCoin.network, swap.receiveTxHash)">
               <span class="font-bold">{{swap.receiveTxHash}}</span>
             </a>
           </div>
           <div>
-            Recipient Address (<span class="font-bolder color-success">{{swap.receivingCoin.code}}</span>):
-            <a target="_blank" :href="walletAddressUrl(swap.receivingCoin.network, swap.recipientWallet)">
+            {{$t('pages.swapView.transactionBox.recipientWallet')}} (<span class="font-bolder color-success">{{swap.receivingCoin.code}}</span>):
+            <a dir="ltr" target="_blank" :href="walletAddressUrl(swap.receivingCoin.network, swap.recipientWallet)">
               <span class="font-bold">{{swap.recipientWallet}}</span>
             </a>
           </div>

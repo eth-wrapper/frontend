@@ -21,49 +21,27 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(row, index) in swapList">
-                <!--<td>{{row.txTime}}</td>-->
-                <td>
-                  <BaseLink :to="{name: 'swap-id', params: {id: row._id}}">
-                    <span>{{row._id}}</span>
-                  </BaseLink>
+              <tr v-if="loading && swapList.length==0">
+                <td colspan="7" class="text-center">
+                  <i style="font-size: 2em" class="fa fa-spinner fa-lg fa-spin"></i>
                 </td>
-                <td>
-                  <span class="badge badge-pill" :class="getStatusClass(row.status)">{{row.status}}</span>
-                </td>
-                <td>
-                  <img :src="`/coin-icons/${row.depositCoin.network}/${row.depositCoin.code}.png`" class="coin-avatar">
-                  <span>{{row.depositCoin.code}}</span>
-                </td>
-                <td>
-                  <span>{{row.depositAmount}}</span>
-                </td>
-                <td>
-                  <a v-if="row.depositTxHash" :href="txHashUrl(row.depositCoin.network, row.depositTxHash)" target="_blank">
-                    <span>{{row.depositTxHash.substr(0, 12)}} ...</span>
-                  </a>
-                </td>
-                <td>
-                  <img :src="`/coin-icons/${row.receivingCoin.network}/${row.receivingCoin.code}.png`" class="coin-avatar">
-                  <span>{{row.receivingCoin.code}}</span>
-                </td>
-                <td>
-                  <span>{{row.receivingAmount}}</span>
-                </td>
-                <td>
-                  <span>{{row.recipientWallet.substr(0, 12)}} ...</span>
-                </td>
-                <th>
-                  <a
-                    v-if="row.status==='deposit-confirmed'"
-                    @click="sendCoin(row, index)"
-                    class="badge badge-pill badge-success"
-                    href="#"
-                  >withdraw</a>
-                </th>
               </tr>
+              <SwapListItem
+                v-for="(row, index) in currentPage"
+                :key="page*limit + index"
+                :swap="row"
+                @withdraw="swap => sendCoin(swap)"
+              />
               </tbody>
             </table>
+            <div class="text-center">
+              <Pagination
+                :count="Math.ceil(swapList.length / limit)"
+                :itemPerPage="limit"
+                :current="page"
+                @change="onPageChange"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -72,30 +50,49 @@
 </template>
 
 <script>
+
   import {mapGetters, mapActions} from 'vuex';
   import Vue from 'vue';
+  import SwapListItem from '../../components/SwapListItem';
+  import Pagination from '~/components/Pagination';
   import blockchainUtils from '../../mixins/blockchainUtils';
 
   export default {
     mixins: [blockchainUtils],
-    components: {},
+    components: {SwapListItem, Pagination},
     layout: 'coreui',
     data() {
       return {
         loading: true,
-        swapList: []
+        swapList: [],
+        page: 0,
+        limit: 25
       }
     },
     mounted(){
       this.loadSwapList();
     },
+    computed:{
+      currentPage: function () {
+        let start = this.page * this.limit;
+        let end = start + this.limit;
+        for(let i=start ; i<end ; i++){
+          if(this.swapList[i] === null){
+            this.getPageResult(this.page);
+            break;
+          }
+        }
+        return this.swapList.slice(start, end)
+      }
+    },
     methods: {
       loadSwapList(){
         this.loading = true;
-        this.$axios.post('/api/v0.1/operator/swap-list')
+        this.$axios.post('/api/v0.1/operator/swap-list',{page: this.page, limit: this.limit})
           .then(({data}) => {
             if(data.success){
-              this.swapList = data.swapList;
+              this.swapList = new Array(data.totalCount).fill(null);
+              this.swapList.splice(data.page * data.limit, data.swapList.length, ...data.swapList);
             }
           })
           .catch(error => {})
@@ -103,23 +100,11 @@
             this.loading = false;
           })
       },
-      getStatusClass(status){
-        switch (status) {
-          case 'new': return {'badge-secondary': true};
-          case 'deposit-sent': return {'badge-warning': true};
-          case 'deposit-confirmed': return {'badge-primary': true};
-          case 'withdraw-sent': return {'badge-warning': true}
-          case 'withdraw-confirmed': return {'badge-success': true}
-          case 'done': return {'badge-success': true};
-          case 'cancel':
-          case 'fail': return {'badge-danger': true};
-        }
-      },
-      sendCoin(swap, index){
+      sendCoin(swap){
         if(swap.receivingCoin.network === 'ethereum')
           this.sendCoinByMetaMask(swap);
         else
-          this.sendCoinsManually(swap, index)
+          this.sendCoinsManually(swap)
       },
       sendCoinByMetaMask(swap){
         if (typeof web3 == 'undefined' || !web3.currentProvider.isMetaMask /*|| ( web3.currentProvider.isMetaMask && typeof web3.eth.accounts[0] == 'undefined' ) */) {
@@ -179,7 +164,7 @@
             this.$toast.error(error.message || "Somethings went wrong.");
           })
       },
-      sendCoinsManually(swap, index){
+      sendCoinsManually(swap){
         let txHash = prompt('Enter withdraw transaction hash :');
         if(txHash) {
           this.registerSwapWithdraw(swap, txHash);
@@ -199,6 +184,24 @@
           .catch(error => {
             this.$toast.error(error.response.message || "Somethings went wrong.")
           })
+      },
+      getPageResult(page){
+        if(this.loading)
+          return;
+        this.loading = true;
+        this.$axios.post('/api/v0.1/operator/swap-list',{page,limit: this.limit})
+          .then(({data}) => {
+            if(data.success){
+              this.swapList.splice(data.page * data.limit, data.swapList.length, ...data.swapList);
+            }
+          })
+          .catch(error => {})
+          .then(() => {
+            this.loading = false;
+          })
+      },
+      onPageChange(page){
+        this.page = page;
       }
     }
   }

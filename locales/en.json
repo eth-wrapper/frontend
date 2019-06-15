@@ -82,6 +82,28 @@
         "copyMessage": "Copy & paste this address to your wallet or scan the QR code via your wallet app",
         "metaMaskMessage": "Click here to send your coins",
         "sendCoins": "Send Coins"
+      },
+      "sendConfirmBox":{
+        "message1": "Deposit detected successfully and Confirmation in progress ...",
+        "message2": "Please be patient to transaction be confirmed."
+      },
+      "withdrawWaitingBox": {
+        "message1": "Deposit detected successfully and <span class=\"color-orange\">{code}</span> transfer in progress ...",
+        "message2": "Transfer may take a while. please be patient."
+      },
+      "withdrawConfirmingBox": {
+        "message1": "Your <span class=\"color-orange\">{code}</span> transferred. Please be patient to transaction be confirmed",
+        "message2": "Transaction confirmation may take a while. please be patient."
+      },
+      "doneStatusBox":{
+        "message1": "Your <span class=\"color-orange\">{{swap.receivingCoin.code}}</span> send transaction confirmed successfully.",
+        "message2": "Check your wallet now."
+      },
+      "transactionBox":{
+        "swapId": "Swap ID",
+        "depositTransaction": "Deposit",
+        "withdrawTransaction": "Swap Transaction",
+        "recipientWallet": "Recipient Address"
       }
     },
     "userSwapList":{

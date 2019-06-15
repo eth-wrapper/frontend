@@ -133,7 +133,7 @@
               this.$router.push({name: 'swap-id', params: {id: data.swapId}})
             }else{
               // TODO: show proper message
-              alert(JSON.stringify(data, null, 2));
+                this.$toast.error(data.message || this.$t('sse'))
             }
           })
           .catch(error => {})

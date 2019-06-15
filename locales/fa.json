@@ -82,6 +82,28 @@
         "copyMessage": "آدرس بالا را copy و در کیف پول خود past کنید. و یا بوسیله نرم افزار کیف پول خود کد QR بالا را اسکن کنید.",
         "metaMaskMessage": "برای ارسال کوین ها اینجا را کلیک کنید",
         "sendCoins": "Send Coins"
+      },
+      "sendConfirmBox":{
+        "message1": "تراکنش ارسال کوین شناسایی شد. در انتظار تایید تراکنش ...",
+        "message2": "لطفا تا تایید تراکنش ارسال صبر نمایید."
+      },
+      "withdrawWaitingBox": {
+        "message1": "ارسال کوین با موفقیت تایید شده و <span class=\"color-orange\">{code}</span> در انتظار ارسال به حساب شماست ...",
+        "message2": "انتقال ممکن است کمی به طول بیانجامد. لطفا شکیبا باشید."
+      },
+      "withdrawConfirmingBox": {
+        "message1": "انتقال <span class=\"color-orange\">{code}</span> انجام شد.",
+        "message2": "لطفا تا تایید نهایی نراکنش انتقال صبر کنید."
+      },
+      "doneStatusBox":{
+        "message1": "تراکنش انتقال <span class=\"color-orange\">{code}</span> با موفقیت تایید شد.",
+        "message2": "لطفا کیف پول خود را بررسی نمایید."
+      },
+      "transactionBox":{
+        "swapId": "شماره مبادله",
+        "depositTransaction": "تراکنش ارسال",
+        "withdrawTransaction": "تراکنش دریافت",
+        "recipientWallet": "آدرس دربافت"
       }
     },
     "userSwapList":{
