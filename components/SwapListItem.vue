@@ -55,7 +55,9 @@
       <span>{{swap.receivingAmount}}</span>
     </td>
     <td>
-      <span>{{swap.recipientWallet.substr(0, 12)}} ...</span>
+      <a target="_blank" :href="walletAddressUrl(swap.receivingCoin.network, swap.recipientWallet)">
+        <span>{{swap.recipientWallet.substr(0, 12)}} ...</span>
+      </a>
     </td>
     <td>
       <a
@@ -63,7 +65,7 @@
         @click="() => onWithdraw(swap)"
         class="badge badge-pill badge-primary"
         href="#"
-      >withdraw</a>
+      >{{btnTitle}}</a>
     </td>
   </tr>
   <tr v-else>
@@ -101,9 +103,18 @@
     props: ['swap'],
     mixins: [blockchainUtils],
     components: {CoinAvatar},
+    computed:{
+      btnTitle: function () {
+        if (this.swap.receivingCoin.network === 'ethereum'){
+          return 'mint'
+        }else{
+          return 'burn'
+        }
+      }
+    },
     methods: {
       onWithdraw(swap){
-        this.$emit('withdraw', swap);
+        this.$emit('btnClick', swap);
       },
       getStatusClass(status){
         switch (status) {

@@ -30,7 +30,7 @@
                 v-for="(row, index) in currentPage"
                 :key="page*limit + index"
                 :swap="row"
-                @withdraw="swap => sendCoin(swap)"
+                @btnClick="swap => sendCoin(swap)"
               />
               </tbody>
             </table>
@@ -102,22 +102,22 @@
       },
       sendCoin(swap){
         if(swap.receivingCoin.network === 'ethereum')
-          this.sendCoinByMetaMask(swap);
+          this.mintCoinByMetaMask(swap);
         else
           this.sendCoinsManually(swap)
       },
-      sendCoinByMetaMask(swap){
+      mintCoinByMetaMask(swap){
         if (typeof web3 == 'undefined' || !web3.currentProvider.isMetaMask /*|| ( web3.currentProvider.isMetaMask && typeof web3.eth.accounts[0] == 'undefined' ) */) {
           alert("MetaMask is not enabled.");
           return;
         }
         let minABI = [
-          // transfer
+          // mint
           {
             "constant": false,
             "inputs": [
               {
-                "name": "_to",
+                "name": "_address",
                 "type": "address"
               },
               {
@@ -125,13 +125,10 @@
                 "type": "uint256"
               }
             ],
-            "name": "transfer",
-            "outputs": [
-              {
-                "name": "",
-                "type": "bool"
-              }
-            ],
+            "name": "mint",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
             "type": "function"
           }
         ];
@@ -148,8 +145,8 @@
             // calculate ERC20 token amount
             let amount = web3.toBigNumber(swap.receivingAmount);
             let value = amount.times(web3.toBigNumber(10).pow(swap.receivingCoin.info.decimals));
-            console.log('value: ', value.toNumber());
-            contract.transfer(swap.recipientWallet, value, (error, txHash) => {
+            console.log(`mint [${value.toNumber()}] ${swap.receivingCoin.code} to [${swap.recipientWallet}]`);
+            contract.mint(swap.recipientWallet, value, (error, txHash) => {
               if (error) {
                 alert("Internal Error!\n\n" + error.message);
                 return;
