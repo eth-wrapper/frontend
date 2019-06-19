@@ -123,8 +123,8 @@
           "new": "جدید",
           "deposit-init": "ارسال شده",
           "deposit-confirmed": "تایید ارسال",
-          "withdraw-init": "دریافت شده",
-          "withdraw-confirmed": "تایید دریافت",
+          "withdraw-sent": "تایید دریافت",
+          "withdraw-confirmed": "دریافت شده",
           "cancel": "لغو",
           "fail": "خطا"
         }

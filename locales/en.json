@@ -96,7 +96,7 @@
         "message2": "Transaction confirmation may take a while. please be patient."
       },
       "doneStatusBox":{
-        "message1": "Your <span class=\"color-orange\">{{swap.receivingCoin.code}}</span> send transaction confirmed successfully.",
+        "message1": "Your <span class=\"color-orange\">{code}</span> send transaction confirmed successfully.",
         "message2": "Check your wallet now."
       },
       "transactionBox":{
@@ -123,8 +123,8 @@
           "new": "new",
           "deposit-init": "deposit init",
           "deposit-confirmed": "deposit confirmed",
-          "withdraw-init": "withdraw init",
-          "withdraw-confirmed": "withdraw confirmed",
+          "withdraw-sent": "Receive confirming",
+          "withdraw-confirmed": "receive confirmed",
           "cancel": "cancel",
           "fail": "fail"
         }

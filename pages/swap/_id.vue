@@ -16,7 +16,7 @@
             <div class="d-flex">
               <div class="d-flex flex-grow-0" style="align-items: center">
                 <div style="padding-right: 1em">
-                  <CoinAvatar size="5" :coin="swap.depositCoin" />
+                  <CoinAvatar size="5" :coin="swap.depositCoin"/>
                 </div>
                 <div class="d-none d-sm-block">
                   <div class="font-2xl text-bold">{{swap.depositAmount}}</div>
@@ -25,7 +25,8 @@
                 </div>
               </div>
               <div class="flex-grow-1">
-                <i class="icons font-5xl d-block cui-arrow-right d-block d-md-none text-center" style="margin-top: 1rem"></i>
+                <i class="icons font-5xl d-block cui-arrow-right d-block d-md-none text-center"
+                   style="margin-top: 1rem"></i>
                 <StepProgress
                   class="d-none d-md-block"
                   :length="$t('pages.swapView.progressSteps').length"
@@ -39,7 +40,7 @@
                   <div class="font-2xl color-orange">{{swap.receivingCoin.code}}</div>
                 </div>
                 <div style="padding-left: 1em; text-align: right">
-                  <CoinAvatar size="5" :coin="swap.receivingCoin" />
+                  <CoinAvatar size="5" :coin="swap.receivingCoin"/>
                 </div>
               </div>
             </div>
@@ -88,19 +89,24 @@
 
         <!-- Withdraw waiting for send -->
         <div v-if="swap.status === 'deposit-confirmed'" class="box-shadow-2 bg-white pd10">
-          <h4 :dir="pageDirection" class="nomg font-bolder" v-html="$t('pages.swapView.withdrawWaitingBox.message1', {code: swap.receivingCoin.code})"></h4>
-          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.withdrawWaitingBox.message2')}}</div>
+          <h4 :dir="pageDirection" class="nomg font-bolder"
+              v-html="$t('pages.swapView.withdrawWaitingBox.message1', {code: swap.receivingCoin.code})"></h4>
+          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.withdrawWaitingBox.message2')}}
+          </div>
         </div>
 
         <!-- Withdraw waiting for confirm -->
         <div v-if="swap.status === 'withdraw-sent'" class="box-shadow-2 bg-white pd10">
-          <h4 :dir="pageDirection" class="nomg font-bolder" v-html="$t('pages.swapView.withdrawConfirmingBox.message1', {code: swap.receivingCoin.code})"></h4>
-          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.withdrawConfirmingBox.message2')}}</div>
+          <h4 :dir="pageDirection" class="nomg font-bolder"
+              v-html="$t('pages.swapView.withdrawConfirmingBox.message1', {code: swap.receivingCoin.code})"></h4>
+          <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.withdrawConfirmingBox.message2')}}
+          </div>
         </div>
 
         <!-- Done status info viewer box -->
         <div v-if="swap.status === 'withdraw-confirmed'" class="box-shadow-2 bg-white pd10">
-          <h4 :dir="pageDirection" class="nomg font-bolder" v-html="$t('pages.swapView.doneStatusBox.message1', {code: swap.receivingCoin.code})"></h4>
+          <h4 :dir="pageDirection" class="nomg font-bolder"
+              v-html="$t('pages.swapView.doneStatusBox.message1', {code: swap.receivingCoin.code})"></h4>
           <div :dir="pageDirection" style="margin-bottom: 1em">{{$t('pages.swapView.doneStatusBox.message2')}}</div>
         </div>
         <div v-if="swap.status === 'done'" class="box-shadow-2 bg-white pd10">
@@ -252,6 +258,7 @@
             "type": "function"
           }
         ];
+
         function signMsg(msgParams, from) {
           return new Promise(function (resolve, reject) {
             web3.currentProvider.sendAsync({
@@ -281,27 +288,27 @@
         /**
          * request MetaMask permission to access the accounts
          */
-        ethereum.enable()
-          .then(() => {
-            web3.eth.defaultAccount = web3.eth.accounts[0];
-          })
-          .then(() => {
-            // creating deposit signature
-            let signMessageParams = [
-              {
-                type: 'string',      // Any valid solidity type
-                name: 'from',     // Any string label you want
-                value: web3.eth.accounts[0]  // The value to sign
-              },
-              {
-                type: 'string',      // Any valid solidity type
-                name: 'swap',     // Any string label you want
-                value: this.swap._id  // The value to sign
-              }
-            ];
-            let from = web3.eth.accounts[0];
-            return signMsg(signMessageParams, from)
-          })
+        if (web3.eth.accounts.length == 0) {
+          ethereum.enable();
+          return;
+        }
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+
+        // creating deposit signature
+        let signMessageParams = [
+          {
+            type: 'string',      // Any valid solidity type
+            name: 'from',     // Any string label you want
+            value: web3.eth.accounts[0]  // The value to sign
+          },
+          {
+            type: 'string',      // Any valid solidity type
+            name: 'swap',     // Any string label you want
+            value: this.swap._id  // The value to sign
+          }
+        ];
+        let from = web3.eth.accounts[0];
+        signMsg(signMessageParams, from)
           .then(depositSignature => {
             console.log('deposit signature: ', depositSignature);
 
@@ -349,7 +356,7 @@
 </script>
 
 <style scoped>
-  .swap-view{
+  .swap-view {
     align-items: center;
     margin-top: 2rem;
     justify-content: center;
@@ -358,6 +365,7 @@
     border-radius: 3rem;
     padding: 0.5rem;
   }
+
   .coin-avatar {
     width: 1.3rem;
     height: 1.3rem;
