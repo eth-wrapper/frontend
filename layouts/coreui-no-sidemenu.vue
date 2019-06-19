@@ -1,5 +1,5 @@
 <template>
-  <div class="app header-fixed bg-poster" :class="{'farsi-font': locale === 'fa'}">
+  <div class="app header-fixed bg-blue bg-poster" :class="{'farsi-font': locale === 'fa'}">
     <HeaderNoSideMenu />
     <div class="app-body">
       <!--<LeftSideBar />-->
